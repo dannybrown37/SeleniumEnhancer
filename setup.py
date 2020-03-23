@@ -5,9 +5,9 @@ with open("README.md", "r") as fh:
     long_description  =  fh.read()
 
 setuptools.setup(
-    name = 'SeleniumEnhancer',  
+    name = 'selenium_enhancer',  
     version = '0.1',
-    scripts = ['selenium_enhancer'] ,
+    scripts = ['selenium_enhancer.py'] ,
     author = "Danny Brown",
     author_email = "dannybrown37@gmail.com",
     description = "A package to enhance your Selenium WebDriver experience",

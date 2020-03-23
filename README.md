@@ -4,6 +4,8 @@ Install using:
 pip install SeleniumEnhancer
 ```
 
+See PyPi package at: https://pypi.org/project/selenium-enhancer/0.1/
+
 Help on module selenium_helper:
 
 NAME
