@@ -1,3 +1,9 @@
+Install using:
+
+```
+pip install SeleniumEnhancer
+```
+
 Help on module selenium_helper:
 
 NAME
