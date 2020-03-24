@@ -1,10 +1,25 @@
-Install using:
+# Installation
 
 ```
-pip install SeleniumEnhancer
+pip install selenium-enhancer
 ```
 
-See PyPi package at: https://pypi.org/project/selenium-enhancer/0.1/
+# Setting Up a Driver
+
+[ChromeDriver](https://chromedriver.chromium.org/) is recommended as it has more options, but Firefox and 
+IE drivers are compatible as well. Set the path to your chosen driver 
+as a system environment variable named CHROME_DRIVER, FIREFOX_DRIVER, 
+or IE_DRIVER.
+
+I just found this repo: https://pypi.org/project/chromedriver-binary/
+I have not tested it yet, but it might be an easier solution to the 
+problem. Will upate this note after testing.
+
+# Miscellaneous
+
+[PyPi](https://pypi.org/project/selenium-enhancer/0.1/)
+
+# pydoc Output
 
 Help on module selenium_helper:
 
