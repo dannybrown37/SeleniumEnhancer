@@ -14,4 +14,4 @@ See/run `examples.py` for usage examples.
 
 # Miscellaneous
 
-[PyPi](https://pypi.org/project/selenium-enhancer/0.1/)
+[PyPi](https://pypi.org/project/selenium-enhancer/)
