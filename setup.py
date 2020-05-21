@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name = 'selenium_enhancer',  
-    version = '0.1.2',
+    version = '0.1.6',
     scripts = ['selenium_enhancer.py'] ,
     author = "Danny Brown",
     author_email = "dannybrown37@gmail.com",
@@ -15,6 +15,8 @@ setuptools.setup(
     long_description_content_type = "text/markdown",
     url = "https://github.com/dannybrown37/SeleniumEnhancer",
     packages = setuptools.find_packages(),
+    package_data={'data' : ['Google-Analytics-Debugger_v2.8.crx.crx']},
+    py_modules=['selenium_enhancer'],
     classifiers = [
          "Programming Language :: Python :: 3",
          "License :: OSI Approved :: MIT License",

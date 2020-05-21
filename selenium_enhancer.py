@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import contextlib
 from selenium import webdriver
@@ -14,24 +15,27 @@ from selenium.webdriver.common.by import By
 
 class SeleniumEnhancer(object):
     """
-        A parent class that assists with Selenium testing and automation.
+        Parent class that assists with Selenium testing and automation.
 
-        This class is built to be inherited by more specialized tasks that
-        will benefit from the Selenium web driver functionality within.
+        This class is built to be inherited by classes that will benefit 
+        from the enhanced Selenium web driver functionality within.
 
         Methods are arranged alphabetically for value.
     """
 
     def accept_simple_alert(self):
-        """ Method method clicks the OK button in a pop-up alert. """
+        """ Method method clicks the OK button in a pop-up alert. 
+        
+            Only use this when *sure* of an alert, otherwise it will 
+            loop infinitiely looking for one.
+        """
         while True:
             try:
                 alert = self.driver.switch_to.alert
                 alert.accept()
                 break
             except NoAlertPresentException:
-                continue # only use this when *sure* of an alert
-                         # otherwise will loop infinitiely looking for one
+                continue 
 
 
     def attach_image_file_to_input(self, input_id, img_path):
@@ -151,11 +155,15 @@ class SeleniumEnhancer(object):
             if dbl_click:
                 action = ActionChains(self.driver)
                 action.double_click(element).perform()
-            elif no_js:
+            elif no_js: # for use cases where one wants to explicitly ignore JS
                 action = ActionChains(self.driver)
                 action.move_to_element(element).click(element).perform()
             else: # default case
-                self.driver.execute_script("arguments[0].click();", element)
+                try:
+                    self.driver.execute_script("arguments[0].click();", element)
+                except UnboundLocalError: # Try a no JS click as a fail case
+                    action = ActionChains(self.driver)
+                    action.move_to_element(element).click(element).perform()
             break
 
 
@@ -322,9 +330,7 @@ class SeleniumEnhancer(object):
         FIREFOX_PATH = os.environ['FIREFOX_DRIVER']
         # must set environment variable FIREFOX_DRIVER equal to local path
         self.options = webdriver.FirefoxOptions()
-        self.driver = webdriver.Firefox(
-            executable_path=FIREFOX_PATH
-        )
+        self.driver = webdriver.Firefox(executable_path=FIREFOX_PATH)
         self.driver.find_element_by_xpath('/html/body').send_keys(Keys.F11)
         # self.driver.implicitly_wait(1)
 
