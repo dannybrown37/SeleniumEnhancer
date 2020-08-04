@@ -288,6 +288,11 @@ class SeleniumEnhancer(object):
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--disable-infobars")
 
+        # Supress unwanted DevTools messages
+        chrome_options.add_experimental_option(
+            "excludeSwitches", ["enable-logging"]
+        )
+
         # If desired, the next option detaches the browser from driver
         # Thus allowing the browser to stay open after driver closes
         # The downside is the requirement to manually close browsers

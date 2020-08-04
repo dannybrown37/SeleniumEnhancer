@@ -23,7 +23,7 @@ class ExampleCases(SeleniumEnhancer):
         # built-in Selenium method to go to web page
         self.driver.get("https://www.google.com")
 
-        # Enter search term, click "I'm Feelign Lucky button"
+        # Enter search term, click "I'm Feeling Lucky button"
         self.set_input_elements({"//input[@name='q']" : "Selenium Enhancer"})
         self.click_button("//input[@name='btnI']") # I'm Feeling Lucky
         
