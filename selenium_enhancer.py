@@ -22,8 +22,9 @@ class SeleniumEnhancer(object):
         Methods are arranged alphabetically for value.
     """
 
+
     def accept_simple_alert(self):
-        """ Method method clicks the OK button in a pop-up alert. 
+        """ Method clicks the OK button in a pop-up alert. 
         
             Only use this when *sure* of an alert, otherwise it will 
             loop infinitiely looking for one.

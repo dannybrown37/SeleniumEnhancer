@@ -15,3 +15,11 @@ See/run `examples.py` for usage examples.
 # Miscellaneous
 
 [PyPi](https://pypi.org/project/selenium-enhancer/)
+
+
+# Updating PyPi (notes to self)
+
+0. Commit to Git
+1. Update version number in setup.py
+2. `python setup.py sdist`
+3. `twine upload --skip-existing dist/*`
