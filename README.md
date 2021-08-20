@@ -14,11 +14,11 @@ class ClassName(SeleniumEnhancer):
     def complete_web_form(self):
         self.start_chrome_driver()
         self.driver.get("full-url-of-page-with-form.com")
-        self.driver.set_input_elements({
+        self.set_input_elements({
             "id or CSS selector or XPath" : "value I want to set",
             "second id or CSS selector or XPath" : "second value"
         })
-        self.driver.set_select_elements({
+        self.set_select_elements({
             "name or id of select element" : "partial/complete text of option"
         })
         self.click_button("submitButtonId")
