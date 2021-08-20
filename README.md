@@ -6,6 +6,7 @@ pip install selenium-enhancer
 
 # Getting Started
 
+```python
 from selenium_enhancer import SeleniumEnhancer
 
 class ClassName(SeleniumEnhancer):
@@ -25,6 +26,7 @@ class ClassName(SeleniumEnhancer):
 
 driver = ClassName()
 driver.complete_web_form()
+```
 
 # Setting Up a Driver
 
