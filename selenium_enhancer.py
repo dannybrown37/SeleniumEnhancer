@@ -2,7 +2,6 @@
 import os
 import contextlib
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import staleness_of
 from selenium.common.exceptions import *
 from selenium.webdriver.support.ui import Select
@@ -64,11 +63,13 @@ class SeleniumEnhancer(object):
             )
         except NoSuchElementException:
             element = self.driver.find_element_by_xpath(checkbox_id)
+        
         if return_status:
             if element.is_selected():
                 return True
             else:
                 return False
+
         if not uncheck: # make sure specified element is checked
             if not element.is_selected():
                 element.click()
@@ -211,13 +212,15 @@ class SeleniumEnhancer(object):
                 return element.text
 
 
-    def set_input_elements(self, data):
+    def set_input_elements(self, data, clear=False):
         """ Method to set any number of text input elements on a page.
 
             Requires a dictionary with at least one key-value pair but
             can be any size. Keys must be an identifier that can be a
             partial/unique id or XPath. Values should be the desired
             text corresponding to each identifier.
+
+            clear=True will clear the elements first
         """
         for key, value in data.items():
             # Select each input and textarea element
@@ -225,18 +228,26 @@ class SeleniumEnhancer(object):
                 element = self.driver.find_element_by_xpath(
                     f"//*[contains(@id, '{key}')]"
                 )
-                element.send_keys(value)
+
             except NoSuchElementException:
+
                 try: # xpaths are allowed for inputs without id attributes
                     element = self.driver.find_element_by_xpath(key)
-                    element.send_keys(value)
                 except NoSuchElementException:
                     print(f"Element matching {key} can't be found!")
+
             except ElementNotInteractableException:
                 # the csc field (only) on the payment page requires this ...?
-                self.driver.find_element_by_xpath(
+                element = self.driver.find_element_by_xpath(
                     f"//input[contains(@name, '{key}')]"
-                ).send_keys(value)
+                )
+            
+            # If specified, clear input element first
+            if clear:
+                element.clear()
+
+            # Finally, send the value
+            element.send_keys(value)
 
 
     def set_select_elements(self, data):
@@ -244,31 +255,42 @@ class SeleniumEnhancer(object):
 
             Requires a dictionary with at least one key-value pair but
             can be any size. Keys must be an identifier that can be a
-            partial/unique ~name~. Values should be the text of the
-            desired option to select.
+            partial/unique ~name~ or ID. Values should be the text of 
+            the desired option to select.
         """
+
+        type_ = ""
         for key, value in data.items():
             # Select each <select> element
             try:
                 element = Select(self.driver.find_element_by_xpath(
                     f"//select[contains(@name, '{key}')]"
                 ))
-                element.select_by_visible_text(value)
+                type_ = "name"
             except NoSuchElementException:
-                print(f"Element matching \"{key}\" cannot be found!")
+                try:
+                    element = Select(self.driver.find_element_by_xpath(
+                        f"//select[contains(@id, '{key}')]"
+                    ))
+                    type_ = "id"
+                except NoSuchElementException:
+                    print(f"Element matching \"{key}\" cannot be found!")
 
-    """ # trying out without this to see if it speeds things up.
-        attempts = 0
-        while True:
-            # Code above goes here
-            except StaleElementReferenceException:
-                attempts += 1
-                if attempts > 3:
-                    print(f"No match for \"{key}\" was found!")
-                    break
-                else:
-                    continue
-        """
+
+            # Try by full text
+            try:
+                element.select_by_visible_text(value)
+
+            except NoSuchElementException:
+                try:
+                    self.driver.find_element_by_xpath(
+                        f"//select[contains(@{type_}, '{key}')]"
+                        f"/option[contains(., '{value}')]"
+                    ).click()
+                except:
+                    print(f"Option matching {value} not found!")
+
+
 
 
     def start_chrome_driver(self, 
