@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name = 'selenium_enhancer',  
-    version = '0.2.21',
+    version = '0.2.22',
     scripts = ['selenium_enhancer.py'] ,
     author = "Danny Brown",
     author_email = "dannybrown37@gmail.com",
