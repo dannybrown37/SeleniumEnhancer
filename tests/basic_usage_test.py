@@ -1,5 +1,4 @@
 from selenium_enhancer import SeleniumEnhancer
-from time import sleep
 
 
 class ExampleCases(SeleniumEnhancer):
@@ -58,5 +57,5 @@ class ExampleCases(SeleniumEnhancer):
         self.driver.close()
 
 
-if __name__ == "__main__":
+def test_basic_usage():
     ExampleCases()
