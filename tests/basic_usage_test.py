@@ -1,4 +1,4 @@
-from selenium_enhancer import SeleniumEnhancer
+from selenium_enhancer.selenium_enhancer import SeleniumEnhancer
 
 
 class ExampleCases(SeleniumEnhancer):

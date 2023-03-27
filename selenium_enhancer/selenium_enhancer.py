@@ -303,13 +303,19 @@ class SeleniumEnhancer(object):
             extensive option list. 
         """
 
-        # must set environment variable CHROME_DRIVER equal to local path
-        default_path = Path(__file__).absolute().resolve().parents[2]
-        chrome_path = os.environ.get('CHROME_DRIVER', default_path)
+        if os.name == 'nt':
+            out_path = Path(__file__).absolute().resolve().parents[1] / 'drivers'
+        else:
+            out_path = '/usr/local/bin/chromedriver'
+        chrome_path = os.environ.get('CHROME_DRIVER', out_path)
         
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--disable-infobars")
+
+        chrome_options.add_argument(
+            f'user-data-dir={os.getcwd()}/selenium_enhancer/data'
+        )
 
         # Supress unwanted DevTools messages
         chrome_options.add_experimental_option(
