@@ -43,7 +43,8 @@ driver.complete_web_form()
 
 # Examples
 
-See/run `examples.py` for usage examples.
+If you're cloning the repo to contribute, you can run/view/add to the tests
+with at ``pytest tests -s -vv``.
 
 # Miscellaneous
 
