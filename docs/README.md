@@ -49,11 +49,3 @@ with at ``pytest tests -s -vv``.
 # Miscellaneous
 
 [PyPi](https://pypi.org/project/selenium-enhancer/)
-
-
-# Updating PyPi (notes to self)
-
-1. Update version number in setup.py
-2. Commit to Git
-3. `python setup.py sdist`
-4. `twine upload --skip-existing dist/*`
