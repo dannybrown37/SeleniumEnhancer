@@ -1,6 +1,9 @@
-#!/usr/bin/env python
-import os
+#!/usr/bin/env python3
 import contextlib
+import os
+import platform
+from pathlib import Path
+
 from selenium import webdriver
 from selenium.webdriver.support.expected_conditions import staleness_of
 from selenium.common.exceptions import *
@@ -14,10 +17,7 @@ from selenium.webdriver.common.by import By
 
 class SeleniumEnhancer(object):
     """
-        Parent class that assists with Selenium testing and automation.
-
-        This class is built to be inherited by classes that will benefit 
-        from the enhanced Selenium web driver functionality within.
+        Class that assists with Selenium testing and automation.
 
         Methods are arranged alphabetically for value.
     """
@@ -304,12 +304,19 @@ class SeleniumEnhancer(object):
             extensive option list. 
         """
 
-        # must set environment variable CHROME_DRIVER equal to local path
-        CHROME_PATH = os.environ['CHROME_DRIVER']
-        
+        if platform.system() == 'Windows':
+            chrome_path = Path(__file__).absolute().resolve().parent
+            chrome_path = chrome_path / 'drivers' / 'chromedriver.exe'
+        else:
+            chrome_path = '/usr/local/bin/chromedriver'
+
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--disable-infobars")
+
+        chrome_options.add_argument(
+            f'user-data-dir={os.getcwd()}/selenium_enhancer/data'
+        )
 
         # Supress unwanted DevTools messages
         chrome_options.add_experimental_option(
@@ -337,7 +344,7 @@ class SeleniumEnhancer(object):
 
         self.driver = webdriver.Chrome(
             options=chrome_options,
-            executable_path=CHROME_PATH
+            executable_path=chrome_path
         )
         self.driver.implicitly_wait(1)
         self.driverwait = WebDriverWait(self.driver, 10)

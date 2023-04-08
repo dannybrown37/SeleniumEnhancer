@@ -1,13 +1,9 @@
-from selenium_enhancer import SeleniumEnhancer
-from time import sleep
+import pytest
+
+from selenium_enhancer.selenium_enhancer import SeleniumEnhancer
 
 
 class ExampleCases(SeleniumEnhancer):
-
-    def __init__(self):
-
-        self.example_google_search()
-        self.example_web_form_text_input_manipulation()
 
 
     def example_google_search(self):
@@ -17,7 +13,7 @@ class ExampleCases(SeleniumEnhancer):
             have id attributes. 
         """
 
-        self.start_chrome_driver(detach=True)
+        self.start_chrome_driver(detach=True, headless=True)
         # detach=True keeps the browser open after program ends
 
         # built-in Selenium method to go to web page
@@ -39,7 +35,7 @@ class ExampleCases(SeleniumEnhancer):
             method call.
         """
 
-        self.start_chrome_driver(detach=True)
+        self.start_chrome_driver(detach=True, headless=True)
         self.driver.get("https://www.w3schools.com/html/html_forms.asp")
 
         # Clear default text from name boxes        
@@ -58,5 +54,11 @@ class ExampleCases(SeleniumEnhancer):
         self.driver.close()
 
 
-if __name__ == "__main__":
-    ExampleCases()
+def test_basic_google_search():
+    driver = ExampleCases()
+    driver.example_google_search()
+
+
+def test_web_form_with_text_input():
+    driver = ExampleCases()
+    driver.example_web_form_text_input_manipulation()

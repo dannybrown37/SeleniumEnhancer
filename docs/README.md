@@ -4,6 +4,19 @@
 pip install selenium-enhancer
 ```
 
+# Setting Up a Driver
+
+After installing or whenver you need to update to the latest version of
+ChromeDriver, run:
+
+```
+python -m selenium_enhancer.get_latest_chrome_driver
+```
+
+[ChromeDriver](https://chromedriver.chromium.org/) is recommended as it has 
+more options, but Firefox and IE drivers are in theory compatible as well.
+Please feel free to contribute if you need additional functionality.
+
 # Getting Started
 
 ```python
@@ -27,10 +40,6 @@ class ClassName(SeleniumEnhancer):
 driver = ClassName()
 driver.complete_web_form()
 ```
-
-# Setting Up a Driver
-
-[ChromeDriver](https://chromedriver.chromium.org/) is recommended as it has more options, but Firefox and IE drivers are compatible as well. Set the path to your chosen driver as a system environment variable named CHROME_DRIVER FIREFOX_DRIVER, or IE_DRIVER.
 
 # Examples
 
