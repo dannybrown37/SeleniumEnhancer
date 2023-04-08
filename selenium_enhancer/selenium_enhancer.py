@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import contextlib
 import os
+import platform
 from pathlib import Path
 
 from selenium import webdriver
@@ -303,12 +304,12 @@ class SeleniumEnhancer(object):
             extensive option list. 
         """
 
-        if os.name == 'nt':
-            out_path = Path(__file__).absolute().resolve().parents[1] / 'drivers'
+        if platform.system() == 'Windows':
+            chrome_path = Path(__file__).absolute().resolve().parent
+            chrome_path = chrome_path / 'drivers' / 'chromedriver.exe'
         else:
-            out_path = '/usr/local/bin/chromedriver'
-        chrome_path = os.environ.get('CHROME_DRIVER', out_path)
-        
+            chrome_path = '/usr/local/bin/chromedriver'
+
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--disable-infobars")

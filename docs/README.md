@@ -10,9 +10,10 @@ On Linux/WSL, you can download the latest version of Chrome Driver to
 the default location with this script: 
 
 ```bash
+mkdir selenium_enhancer/drivers &&
 LATEST_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && 
 wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$LATEST_VERSION/chromedriver_linux64.zip && 
-sudo unzip /tmp/chromedriver.zip chromedriver -d selenium_enhancer/data/;
+sudo unzip /tmp/chromedriver.zip chromedriver -d selenium_enhancer/drivers;
 ```
 
 [ChromeDriver](https://chromedriver.chromium.org/) is recommended as it has 
