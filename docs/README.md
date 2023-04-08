@@ -6,29 +6,16 @@ pip install selenium-enhancer
 
 # Setting Up a Driver
 
-On Linux/WSL, you can download the latest version of Chrome Driver to
-the default location with this script: 
+After installing or whenver you need to update to the latest version of
+ChromeDriver, run:
 
-```bash
-mkdir selenium_enhancer/drivers &&
-LATEST_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && 
-wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$LATEST_VERSION/chromedriver_linux64.zip && 
-sudo unzip /tmp/chromedriver.zip chromedriver -d selenium_enhancer/drivers;
+```
+python -m selenium_enhancer.get_latest_chrome_driver
 ```
 
 [ChromeDriver](https://chromedriver.chromium.org/) is recommended as it has 
-more options, but Firefox and IE drivers are compatible as well. Set the 
-path to your chosen driver as a system environment variable named 
-CHROME_DRIVER, FIREFOX_DRIVER, or IE_DRIVER.
-
-# Examples
-
-See/run `examples.py` for usage examples.
-
-# Miscellaneous
-
-[PyPi](https://pypi.org/project/selenium-enhancer/)
-
+more options, but Firefox and IE drivers are in theory compatible as well.
+Please feel free to contribute if you need additional functionality.
 
 # Getting Started
 
@@ -54,6 +41,13 @@ driver = ClassName()
 driver.complete_web_form()
 ```
 
+# Examples
+
+See/run `examples.py` for usage examples.
+
+# Miscellaneous
+
+[PyPi](https://pypi.org/project/selenium-enhancer/)
 
 
 # Updating PyPi (notes to self)
